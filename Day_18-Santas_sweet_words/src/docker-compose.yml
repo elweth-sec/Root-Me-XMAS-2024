@@ -1,0 +1,10 @@
+services:
+  santa-app:
+    build:
+      context: ./app/
+    ports:
+      - "127.0.0.1:10020:4567"
+    restart: unless-stopped
+    read_only: true
+    mem_limit: 1g
+    cpus: '1.0'

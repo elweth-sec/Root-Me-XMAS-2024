@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suggest a Gift</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        nav {
+            background-color: #d32f2f;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 8px; 
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex; 
+            justify-content: center;
+        }
+        nav ul li {
+            margin: 0 15px; 
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 10px 15px;
+            border-radius: 4px;
+            transition: background-color 0.3s; 
+        }
+        nav ul li a:hover {
+            background-color: #b71c1c;
+        }
+        .background {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: 600px;
+            margin: auto;
+        }
+        h2 {
+            text-align: center;
+            color: #d32f2f; 
+        }
+        .container {
+            margin-top: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+        }
+        input[type="text"], input[type="file"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #d32f2f;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 15px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #b71c1c;
+        }
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #28a745;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 4px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            transition: opacity 0.3s;
+            opacity: 1;
+            z-index: 1000;
+        }
+        .toast.error {
+            background-color: #dc3545;
+        }
+    </style>
+    <script>
+        async function submitSuggestion() {
+            const name = document.getElementById('name').value;
+            const photo = document.getElementById('photo').files[0];
+
+            const formData = new FormData();
+            formData.append('name', name);
+            formData.append('photo', photo);
+
+            try {
+                const response = await fetch('/api/suggest', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const result = await response.json();
+                showToast(result.message);
+            } catch (error) {
+                console.error('Error:', error);
+                showToast('An error occurred during submission.', true);
+            }
+        }
+
+        function showToast(message, isError = false) {
+            const toast = document.createElement('div');
+            toast.className = `toast ${isError ? 'error' : 'success'}`;
+            toast.innerText = message;
+
+            document.body.appendChild(toast);
+
+            setTimeout(() => {
+                toast.remove();
+            }, 3000);
+        }
+    </script>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="/">🎁 Choose a Gift</a></li>
+            <li><a href="/suggest">🎄 Suggest a Gift</a></li>
+        </ul>
+    </nav>
+    
+    <div class="background">
+        <h2>🎁 Suggest a New Gift for Santa 🎄</h2>
+        <div>
+            Didn't find what you were looking for? Suggest ideas to Santa!
+        </div>
+        <div class="container">
+            <form onsubmit="event.preventDefault(); submitSuggestion();" enctype="multipart/form-data">
+                <label for="name">Product Name:</label>
+                <input type="text" id="name" placeholder="Enter the product name" required>
+                
+                <label for="photo">Upload a Photo:</label>
+                <input type="file" id="photo" accept="image/*" required>
+                
+                <button type="submit">Send Suggestion</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="toast"></div>
+</body>
+</html>

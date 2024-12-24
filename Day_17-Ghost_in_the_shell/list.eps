@@ -1,0 +1,29 @@
+%!PS
+% Configure directory to list
+/target_directory (/tmp/*) def
+
+% Page setup
+/lineheight 12 def
+/xpos 50 def
+/ypos 800 def
+/Courier findfont 10 scalefont setfont
+
+% Move to new line
+/newline {
+    /ypos ypos lineheight sub def
+    ypos 0 lt {
+        showpage
+        /ypos 800 def
+    } if
+    xpos ypos moveto
+} def
+
+% List files and print them
+target_directory { 
+    /curFileName exch def
+    xpos ypos moveto
+    curFileName show
+    newline
+} 4096 string filenameforall
+
+showpage

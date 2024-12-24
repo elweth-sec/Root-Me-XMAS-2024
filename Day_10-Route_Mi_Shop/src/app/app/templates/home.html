@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+<h1 class="text-center">Products</h1>
+<div class="row">
+{% if 'user_id' not in session %}
+    <div class="col-12">
+        <p class="text-danger text-center">
+            The Route-Mi Shop offers a €5 discount coupon for new customers. Don't miss out, <a href="/signup">create an account</a> now!
+        </p>
+    </div>
+{% endif %}
+
+    {% for product in products %}
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <!-- Image Section -->
+                <img src="/static/images/{{ product.id }}.png" class="card-img-top mx-auto mt-3" style="max-height: 200px; width: auto;" alt="{{ product.name }}">
+                <div class="card-body">
+                    <h5 class="card-title text-center">{{ product.name }}</h5>
+                    <p class="card-text text-center">Price: {{ product.price }} €</p>
+                    {% if 'user_id' in session %}
+                        <form class="text-center" action="{{ url_for('buy', product_id=product.id) }}" method="post">
+                            <button class="btn btn-outline-success" type="submit">Buy Now</button>
+                        </form>
+                    {% else %}
+                        <p class="text-danger text-center">Please log in to purchase.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

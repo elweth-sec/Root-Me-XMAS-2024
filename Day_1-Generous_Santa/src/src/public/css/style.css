@@ -1,0 +1,47 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-image: url('/images/background.jpg');
+    background-size: cover;
+    color: white;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    font-size: 3em;
+    margin: 20px 0;
+}
+
+.container {
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.produits-list {
+    list-style: none;
+    padding: 0;
+}
+
+.produit-item {
+    background-color: rgba(113, 9, 9, 0.7);
+    margin: 10px;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.add-button {
+    background-color: #ff4500;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1.2em;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.add-button:hover {
+    background-color: #ff6347;
+}

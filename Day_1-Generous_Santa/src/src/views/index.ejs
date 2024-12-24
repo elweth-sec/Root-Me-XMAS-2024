@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Christmas Gift List</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        nav {
+            background-color: #d32f2f;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+        nav ul li {
+            margin: 0 15px;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 10px 15px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        nav ul li a:hover {
+            background-color: #b71c1c;
+        }
+        .background {
+            background-color: #fff; 
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: 1200px; 
+            margin: auto;
+        }
+        h2 {
+            text-align: center;
+            color: #d32f2f;
+        }
+        .products-list {
+            display: grid; 
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            list-style-type: none;
+            padding: 0;
+        }
+        .product-item {
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+            padding: 15px;
+            border-radius: 8px;
+            background-color: #f8f9fa; 
+            text-align: center;
+        }
+        .add-button {
+            background-color: #d32f2f;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 15px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .add-button:hover {
+            background-color: #b71c1c;
+        }
+        .toast {
+            visibility: hidden;
+            min-width: 250px;
+            margin-left: -125px;
+            background-color: #4CAF50;
+            color: #fff;
+            text-align: center;
+            border-radius: 5px;
+            padding: 16px;
+            position: fixed;
+            z-index: 1;
+            left: 50%;
+            bottom: 30px;
+            font-size: 17px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            background-image: url('https://img.icons8.com/ios-filled/50/ffffff/christmas-star.png');
+            background-repeat: no-repeat;
+            background-position: 10px center;
+            padding-left: 50px;
+        }
+        .toast.show {
+            visibility: visible;
+            animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        }
+        @keyframes fadein {
+            from { bottom: 0; opacity: 0; }
+            to { bottom: 30px; opacity: 1; }
+        }
+        @keyframes fadeout {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+    </style>
+    <script>
+        async function addToSack(productName) {
+            try {
+                const response = await fetch('/api/add', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ product: productName })
+                });
+
+                if (!response.ok) {
+                    throw new Error('Error adding to the sack');
+                }
+
+                const result = await response.json();
+                showToast(result.message || 'Product added to the sack!');
+            } catch (error) {
+                console.error('Error:', error);
+                alert('An error occurred. Please try again.');
+            }
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.className = 'toast show';
+
+            setTimeout(() => {
+                toast.className = toast.className.replace('show', '');
+            }, 3000);
+        }
+    </script>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="/">🎁 Gift List</a></li>
+            <li><a href="/suggest">🎄 Suggest a Gift</a></li>
+        </ul>
+    </nav>
+    
+    <div class="background">
+        <h2>🎄 Christmas Gift List 🎁</h2>
+        <div class="container">
+            <ul class="products-list">
+                <% products.forEach(product => { %>
+                    <li class="product-item">
+                        <h3><%= product.name %></h3>
+                        <p><%= product.description %></p>
+                        <button onclick="addToSack('<%= product.name %>')" class="add-button">Add to Santa's Sack 🎅</button>
+                    </li>
+                <% }); %>
+            </ul>
+        </div>
+    </div>
+
+    <div id="toast"></div>
+</body>
+</html>

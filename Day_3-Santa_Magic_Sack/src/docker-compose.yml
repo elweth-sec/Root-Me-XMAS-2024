@@ -1,0 +1,11 @@
+services:
+  backend:
+    build:
+      context: .
+    ports:
+      - "127.0.0.1:10003:3000"
+    environment:
+      - NODE_ENV=production
+    restart: unless-stopped
+    mem_limit: 1g
+    cpus: '1.0'

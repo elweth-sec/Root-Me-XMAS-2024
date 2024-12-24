@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom HTTP Server</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f6f8fb 0%, #e9f0f7 100%);
+            min-height: 100vh;
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.1);
+        }
+        .btn-gradient {
+            background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%);
+            transition: all 0.3s ease;
+        }
+        .btn-gradient:hover {
+            background: linear-gradient(135deg, #4338CA 0%, #6D28D9 100%);
+            transform: translateY(-2px);
+        }
+        .feature-box {
+            background: rgba(79, 70, 229, 0.1);
+            border: 1px solid rgba(79, 70, 229, 0.2);
+        }
+    </style>
+</head>
+<body class="p-6">
+    <div class="max-w-5xl mx-auto">
+        <header class="text-center mb-12">
+            <h1 class="text-5xl font-bold mb-4 gradient-text">Custom HTTP Server</h1>
+            <div class="bg-white rounded-xl p-6 shadow-lg mb-8">
+                <p class="text-xl text-gray-600">
+                    <span class="font-semibold text-indigo-600">Tired of seeing a new JS framework every month?</span><br>
+                    We've got just the solution for you!
+                </p>
+            </div>
+        </header>
+
+        <div class="feature-box rounded-xl p-6 mb-8 text-center">
+            <h2 class="text-2xl font-semibold text-indigo-700 mb-4">API Endpoints Explorer</h2>
+            <p class="text-gray-600">Discover and test various features of our custom HTTP server</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="card rounded-xl p-6 shadow-lg">
+                <h3 class="text-lg font-semibold text-indigo-600 mb-3">Response Types</h3>
+                <div class="space-y-4">
+                    <a href="/" class="btn-gradient text-white rounded-lg py-3 px-6 block text-center font-medium hover:shadow-lg">
+                        HTML Content
+                    </a>
+                    <a href="/api/xml" class="btn-gradient text-white rounded-lg py-3 px-6 block text-center font-medium hover:shadow-lg">
+                        XML Response
+                    </a>
+                    <a href="/api/json" class="btn-gradient text-white rounded-lg py-3 px-6 block text-center font-medium hover:shadow-lg">
+                        JSON Response
+                    </a>
+                </div>
+            </div>
+
+            <div class="card rounded-xl p-6 shadow-lg">
+                <h3 class="text-lg font-semibold text-indigo-600 mb-3">Security Features</h3>
+                <div class="space-y-4">
+                    <a href="/api/xss?html=<u>test</u>" class="btn-gradient text-white rounded-lg py-3 px-6 block text-center font-medium hover:shadow-lg">
+                        XSS Protection
+                    </a>
+                    <a href="/api/sql?id=1 OR 1=1-- -" class="btn-gradient text-white rounded-lg py-3 px-6 block text-center font-medium hover:shadow-lg">
+                        SQL Injection Protection
+                    </a>
+                </div>
+            </div>
+
+            <div class="card rounded-xl p-6 shadow-lg">
+                <h3 class="text-lg font-semibold text-indigo-600 mb-3">Error Handling</h3>
+                <div class="space-y-4">
+                    <a href="/api/doesnotexists" class="btn-gradient text-white rounded-lg py-3 px-6 block text-center font-medium hover:shadow-lg">
+                        404 Not Found
+                    </a>
+                    <a href="/api/forbidden" class="btn-gradient text-white rounded-lg py-3 px-6 block text-center font-medium hover:shadow-lg">
+                        403 Forbidden
+                    </a>
+                    <a href="/api/badrequest" class="btn-gradient text-white rounded-lg py-3 px-6 block text-center font-medium hover:shadow-lg">
+                        400 Bad Request
+                    </a>
+                </div>
+            </div>
+
+            <div class="card rounded-xl p-6 shadow-lg">
+                <h3 class="text-lg font-semibold text-indigo-600 mb-3">Navigation</h3>
+                <div class="space-y-4">
+                    <a href="/api/redirect?url=/otherpage" class="btn-gradient text-white rounded-lg py-3 px-6 block text-center font-medium hover:shadow-lg">
+                        URL Redirection
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <footer class="mt-12 text-center text-gray-600">
+            <p>&copy; 2024 Custom HTTP Server
+            </p>
+        </footer>
+    </div>
+</body>
+</html>

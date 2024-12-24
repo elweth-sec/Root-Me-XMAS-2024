@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  overflow: hidden;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #a1c4fd #f1f5f9;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #4facfe, #00f2fe);
+  border-radius: 5px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #00f2fe, #4facfe);
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 5px;
+}

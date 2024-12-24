@@ -1,0 +1,9 @@
+services:
+  ghostscript-service:
+    build: .
+    ports:
+      - "10017:12345"
+    restart: always
+    stdin_open: true
+    tty: true
+    mem_limit: 256m

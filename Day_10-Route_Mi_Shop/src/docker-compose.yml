@@ -1,0 +1,9 @@
+services:
+  app:
+    build:
+      context: ./app
+    ports:
+      - "5000:5000"
+    restart: unless-stopped
+    mem_limit: 1g
+    cpus: '1.0'

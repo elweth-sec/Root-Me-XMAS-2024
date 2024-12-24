@@ -1,0 +1,9 @@
+services:
+  ssh_server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ssh_server
+    ports:
+      - "10022:22"
+    read_only: true

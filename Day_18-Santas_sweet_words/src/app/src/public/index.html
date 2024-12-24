@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Santa's Messages</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+      background-color: #f8f9fa;
+      background-image: url('https://www.transparenttextures.com/patterns/snow.png');
+      color: #2c3e50;
+    }
+    .navbar {
+      background-color: #c0392b; /* Red color for Christmas theme */
+    }
+    .navbar a {
+      color: white;
+    }
+    h1, h2 {
+      color: #c0392b; /* Same red color */
+    }
+    .nav-link {
+      color: white;
+      margin: 0 10px;
+    }
+    .navbar-light .navbar-nav .nav-link {
+        color: white;
+    }
+    .message-container {
+      border: 2px dashed #c0392b;
+      background-color: rgba(255, 255, 255, 0.9);
+      padding: 20px;
+      border-radius: 10px;
+    }
+  </style>
+  <script>
+    async function showMessage(number) {
+      try {
+        const response = await fetch(`/api/message?number=${number}`);
+        if (!response.ok) {
+          throw new Error('Error during download. Make sure the number is between 1 and 5.');
+        }
+        const message = await response.text();
+        document.getElementById('message-content').textContent = message;
+      } catch (error) {
+        document.getElementById('message-content').textContent = error.message;
+      }
+    }
+  </script>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="/">Santa's Secret Messages</a>
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/love">Why We Love Ruby</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="/source">View Source</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container mt-5">
+    <h1 class="mb-4">Discover Santa's Message</h1>
+    <p>Click on a number to see the special message Santa left for you!</p>
+    
+    <!-- New navbar for message selection -->
+    <nav class="navbar justify-content-center mb-4">
+      <a class="nav-link" href="javascript:void(0);" onclick="showMessage(1)">1</a>
+      <a class="nav-link" href="javascript:void(0);" onclick="showMessage(2)">2</a>
+      <a class="nav-link" href="javascript:void(0);" onclick="showMessage(3)">3</a>
+      <a class="nav-link" href="javascript:void(0);" onclick="showMessage(4)">4</a>
+      <a class="nav-link" href="javascript:void(0);" onclick="showMessage(5)">5</a>
+    </nav>
+
+    <h2 class="mt-4">Message:</h2>
+    <div class="message-container">
+      <pre id="message-content"></pre>
+    </div>
+  </div>
+</body>
+</html>
