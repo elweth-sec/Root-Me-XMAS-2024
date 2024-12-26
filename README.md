@@ -2,6 +2,14 @@
 
 Writeups & sources of challenges i made for CTF Root-Me Xmas 2024. 
 
+Here are a few writeups from people who participated the event:
+
+- Nikost: [https://blog.nikost.dev/posts/root-xmas-challenge-1-3/](https://blog.nikost.dev/posts/root-xmas-challenge-1-3/)
+- Spikeroot: [https://spikeroot.re/xmas-rootme-01-06](https://spikeroot.re/xmas-rootme-01-06)
+- Mika: [https://blog.bwlryq.net/posts/icmp_exfiltration/](https://blog.bwlryq.net/posts/icmp_exfiltration/)
+- Totoiste: [https://totoiste.marbecrou.fr/root-xmas/](https://totoiste.marbecrou.fr/root-xmas/)
+- Damien: [https://github.com/damien-ramelet/ctf_writeups/tree/main/xmas_root_me_2024](https://github.com/damien-ramelet/ctf_writeups/tree/main/xmas_root_me_2024)
+
 ---
 [Day 1 Generous Santa](Day_1-Generous_Santa/README.md)
 - Category: Web
